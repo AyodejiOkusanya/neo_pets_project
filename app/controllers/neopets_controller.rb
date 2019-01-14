@@ -1,8 +1,9 @@
 class NeopetsController < ApplicationController
+  before_action :find_neo_params, only: [:show,:delete,:play_song]
+  before_action :find_user_params, only: [:index,:edit,:update]
 
   def index
     @neopets = Neopet.all
-    @user = User.find(params[:id])
   end
 
 
@@ -11,7 +12,6 @@ class NeopetsController < ApplicationController
   end
 
   def show
-    @neopet = Neopet.find(params[:id])
   end
 
   def create
@@ -21,12 +21,11 @@ class NeopetsController < ApplicationController
 
   def edit
     @neopet = Neopet.find(params[:pet_id])
-    @user = User.find(params[:id])
+
   end
 
   def update
     @neopet = Neopet.find(params[:pet_id])
-    @user = User.find(params[:id])
     @neopet.user = @user
     @user.neopets << @neopet
     # binding.pry
@@ -34,17 +33,43 @@ class NeopetsController < ApplicationController
   end
 
   def delete
-    @neopet = Neopet.find(params[:id])
     @neopet.destroy
     redirect_to neopets_path
   end
 
-  private
-
-  def neopet_params(*args)
-    params.require(:neopet).permit(args)
+  def play_song
+    play_music
+    happy = @neopet.happiness + 50
+    @neopet.update(happiness: happy)
+    render 'show'
   end
 
 
+  private
 
-end
+    def neopet_params(*args)
+      params.require(:neopet).permit(args)
+    end
+
+    def find_neo_params
+      @neopet = Neopet.find(params[:id])
+    end
+
+    def find_user_params
+      @user = User.find(params[:id])
+    end
+
+
+
+    def play_music
+      RSpotify.authenticate("71c2cbbd78344649836922adbd59e972", "637ac67349b84fbf9d3adc089b146366")
+      recommendations = RSpotify::Recommendations.generate(seed_genres: ['blues', 'country'], limit: 1)
+      song_link =  recommendations.tracks[0].preview_url
+      url = song_link
+      filename = 'track1'
+      file = PullTempfile.pull_tempfile(url: url, original_filename: filename)
+      system "afplay -t 10 #{file.path}"
+      file.unlink
+    end
+
+  end

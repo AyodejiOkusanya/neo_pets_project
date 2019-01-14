@@ -7,7 +7,7 @@ Here are you Neopets:
 <br>
 <% @user.neopets.each do |n| %>
 <br>
-<strong><%= n.name %></strong>
+<strong><%= link_to n.name, neopet_path(n) %></strong>
 <br>
 
 <% end %>

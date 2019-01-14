@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190113201036) do
+ActiveRecord::Schema.define(version: 20190114201900) do
 
   create_table "neopets", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "vegan",      default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "vegan",        default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
+    t.integer  "happiness",    default: 200
+    t.integer  "hunger_level", default: 10
   end
 
   create_table "users", force: :cascade do |t|
