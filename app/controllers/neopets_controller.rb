@@ -38,9 +38,7 @@ class NeopetsController < ApplicationController
   end
 
   def play_song
-    play_music
-    happy = @neopet.happiness + 50
-    @neopet.update(happiness: happy)
+    play_music_and_change_happiness
     render 'show'
   end
 
@@ -61,15 +59,26 @@ class NeopetsController < ApplicationController
 
 
 
-    def play_music
+    def play_music_and_change_happiness
       RSpotify.authenticate("71c2cbbd78344649836922adbd59e972", "637ac67349b84fbf9d3adc089b146366")
       recommendations = RSpotify::Recommendations.generate(seed_genres: ['blues', 'country'], limit: 1)
       song_link =  recommendations.tracks[0].preview_url
       url = song_link
-      filename = 'track1'
-      file = PullTempfile.pull_tempfile(url: url, original_filename: filename)
-      system "afplay -t 10 #{file.path}"
-      file.unlink
+      if url 
+        filename = 'track1'
+        file = PullTempfile.pull_tempfile(url: url, original_filename: filename)
+        system "afplay -t 10 #{file.path}"
+        file.unlink
+        happy = @neopet.happiness + 50
+        @neopet.update(happiness: happy)
+      else
+        flash.now[:notice] = "I don't feel like listening to music right now! Try again later!"
+
+        happy = @neopet.happiness - 50
+        @neopet.update(happiness: happy)
+
+
+      end
     end
 
   end
