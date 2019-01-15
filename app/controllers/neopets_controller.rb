@@ -61,10 +61,10 @@ class NeopetsController < ApplicationController
 
     def play_music_and_change_happiness
       RSpotify.authenticate("71c2cbbd78344649836922adbd59e972", "637ac67349b84fbf9d3adc089b146366")
-      recommendations = RSpotify::Recommendations.generate(seed_genres: ['blues', 'country'], limit: 1)
+      recommendations = RSpotify::Recommendations.generate(seed_genres: [@neopet.music_taste], limit: 1)
       song_link =  recommendations.tracks[0].preview_url
       url = song_link
-      if url 
+      if url
         filename = 'track1'
         file = PullTempfile.pull_tempfile(url: url, original_filename: filename)
         system "afplay -t 10 #{file.path}"

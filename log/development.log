@@ -3514,3 +3514,372 @@ Processing by NeopetsController#show as HTML
   [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 1]]
   Rendered neopets/show.html.erb within layouts/application (0.7ms)
 Completed 200 OK in 82ms (Views: 78.7ms | ActiveRecord: 0.2ms)
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddMusicTasteToNeopets (20190115190519)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "neopets" ADD "music_taste" varchar[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20190115190519"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveVeganFromNeopets (20190115190633)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "aneopets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "vegan" boolean DEFAULT 'f', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer, "happiness" integer DEFAULT 200, "hunger_level" integer DEFAULT 10, "music_taste" varchar) [0m
+  [1m[35m (1.1ms)[0m  SELECT * FROM "neopets"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "aneopets" ("id","name","vegan","created_at","updated_at","user_id","happiness","hunger_level","music_taste") VALUES (1, 'The Champ', 'f', '2019-01-13 20:43:25.678606', '2019-01-15 18:43:49.862560', 1, 0, 10, NULL)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "aneopets" ("id","name","vegan","created_at","updated_at","user_id","happiness","hunger_level","music_taste") VALUES (2, 'Leonardo', 'f', '2019-01-13 20:43:25.682681', '2019-01-15 18:51:54.022938', 2, -150, 10, NULL)
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "neopets"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "neopets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer, "happiness" integer DEFAULT 200, "hunger_level" integer DEFAULT 10, "music_taste" varchar) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aneopets"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "neopets" ("id","name","created_at","updated_at","user_id","happiness","hunger_level","music_taste") VALUES (1, 'The Champ', '2019-01-13 20:43:25.678606', '2019-01-15 18:43:49.862560', 1, 0, 10, NULL)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "neopets" ("id","name","created_at","updated_at","user_id","happiness","hunger_level","music_taste") VALUES (2, 'Leonardo', '2019-01-13 20:43:25.682681', '2019-01-15 18:51:54.022938', 2, -150, 10, NULL)[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aneopets"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190115190633"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+Migrating to AddPictureLinkToNeopets (20190115190722)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "neopets" ADD "picture_link" varchar
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190115190722"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.2ms)[0m  [1mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Deji"], ["created_at", "2019-01-15 19:36:50.002687"], ["updated_at", "2019-01-15 19:36:50.002687"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Goku"], ["created_at", "2019-01-15 19:36:50.010079"], ["updated_at", "2019-01-15 19:36:50.010079"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.6ms)[0m  [1mINSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Petri"], ["music_taste", "afrobeat"], ["picture_link", "http://images.neopets.com/pets/pteri_red_baby.gif"], ["created_at", "2019-01-15 19:36:50.029606"], ["updated_at", "2019-01-15 19:36:50.029606"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Yurble"], ["music_taste", "ambient"], ["picture_link", "http://images.neopets.com/pets/yurble_red_baby.gif"], ["created_at", "2019-01-15 19:36:50.034994"], ["updated_at", "2019-01-15 19:36:50.034994"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ruki"], ["music_taste", "anime"], ["picture_link", "http://images.neopets.com/pets/ruki_green_baby.gif"], ["created_at", "2019-01-15 19:36:50.038611"], ["updated_at", "2019-01-15 19:36:50.038611"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Bori"], ["music_taste", "hard-rock"], ["picture_link", "http://images.neopets.com/pets/bori_green_baby.gif"], ["created_at", "2019-01-15 19:36:50.042846"], ["updated_at", "2019-01-15 19:36:50.042846"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Hissi"], ["music_taste", "new-age"], ["picture_link", "http://images.neopets.com/pets/hissi_blue_baby.gif"], ["created_at", "2019-01-15 19:36:50.046805"], ["updated_at", "2019-01-15 19:36:50.046805"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Lutari"], ["music_taste", "reggaeton"], ["picture_link", "http://images.neopets.com/pets/lutari_green_baby.gif"], ["created_at", "2019-01-15 19:36:50.050698"], ["updated_at", "2019-01-15 19:36:50.050698"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Xweetok"], ["music_taste", "salsa"], ["picture_link", "http://images.neopets.com/pets/xweetok_blue_baby.gif"], ["created_at", "2019-01-15 19:36:50.054821"], ["updated_at", "2019-01-15 19:36:50.054821"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ogrin"], ["music_taste", "trance"], ["picture_link", "http://images.neopets.com/pets/ogrin_red_baby.gif"], ["created_at", "2019-01-15 19:36:50.058866"], ["updated_at", "2019-01-15 19:36:50.058866"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gnorbu"], ["music_taste", "trip-hop"], ["picture_link", "http://images.neopets.com/pets/gnorbu_yellow_baby.gif"], ["created_at", "2019-01-15 19:36:50.062808"], ["updated_at", "2019-01-15 19:36:50.062808"]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "neopets" ("name", "music_taste", "picture_link", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Vandagyre"], ["music_taste", "hip-hop"], ["picture_link", "http://images.neopets.com/pets/vandagyre_yellow_baby.gif"], ["created_at", "2019-01-15 19:36:50.066954"], ["updated_at", "2019-01-15 19:36:50.066954"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/users" for ::1 at 2019-01-15 19:40:12 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 328ms (Views: 303.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/1" for ::1 at 2019-01-15 19:40:19 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.4ms)[0m  SELECT "neopets".* FROM "neopets" WHERE "neopets"."user_id" = ?  [["user_id", 1]]
+  Rendered users/show.html.erb within layouts/application (95.5ms)
+Completed 200 OK in 156ms (Views: 132.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/neopets/index/1" for ::1 at 2019-01-15 19:40:22 +0000
+Processing by NeopetsController#index as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.4ms)[0m  SELECT "neopets".* FROM "neopets"
+  Rendered neopets/index.html.erb within layouts/application (51.0ms)
+Completed 200 OK in 130ms (Views: 125.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/neopets/index/neopets/edit/1/3" for ::1 at 2019-01-15 19:40:27 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"1", "pet_id"=>"3"}
+  [1m[36mUser Load (12.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.4ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered neopets/edit.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 119ms (Views: 84.8ms | ActiveRecord: 13.0ms)
+
+
+Started GET "/neopets/index/neopets/edit/1/1" for ::1 at 2019-01-15 19:40:33 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"1", "pet_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.2ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered neopets/edit.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 86ms (Views: 79.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/neopets/index/neopets/edit/1/8" for ::1 at 2019-01-15 19:40:36 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"1", "pet_id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.4ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered neopets/edit.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 124ms (Views: 118.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/neopets/1/8/edit" for ::1 at 2019-01-15 19:40:37 +0000
+Processing by NeopetsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"k/f8TTXAoMj3kK6j9eIOvwu1rujhODT53fCFy5mDk2M9dgtdweSYdbX1UgL7igIf9u3Qu9CSDLngWwmDmhXovg==", "commit"=>"Add Neopet", "id"=>"1", "pet_id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "neopets" SET "user_id" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["user_id", 1], ["updated_at", "2019-01-15 19:40:37.939236"], ["id", 8]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 28ms (ActiveRecord: 4.3ms)
+
+
+Started GET "/users/1" for ::1 at 2019-01-15 19:40:38 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT "neopets".* FROM "neopets" WHERE "neopets"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 139ms (Views: 100.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/neopets/8" for ::1 at 2019-01-15 19:40:41 +0000
+Processing by NeopetsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.2ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered neopets/show.html.erb within layouts/application (23.0ms)
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `picture_link' for nil:NilClass):
+    1: <h1>My name is <%= @neopet.name %></h1>
+    2: 
+    3: <img src= <%= "#{@nepet.picture_link}" %> alt="">
+    4: 
+    5: <table>
+    6: 
+  app/views/neopets/show.html.erb:3:in `_app_views_neopets_show_html_erb___395733273545805818_70304961264960'
+
+
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.0ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (100.1ms)
+
+
+Started GET "/neopets/8" for ::1 at 2019-01-15 19:41:06 +0000
+Processing by NeopetsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered neopets/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 46ms (Views: 44.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:17 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 150], ["updated_at", "2019-01-15 19:41:17.607024"], ["id", 8]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 370ms (Views: 24.0ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:19 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 100], ["updated_at", "2019-01-15 19:41:19.878845"], ["id", 8]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 306ms (Views: 43.4ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:21 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (1.6ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 50], ["updated_at", "2019-01-15 19:41:21.602679"], ["id", 8]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 310ms (Views: 34.1ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:22 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 0], ["updated_at", "2019-01-15 19:41:22.770822"], ["id", 8]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 314ms (Views: 25.6ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:23 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", -50], ["updated_at", "2019-01-15 19:41:23.781151"], ["id", 8]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 293ms (Views: 28.7ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:24 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", -100], ["updated_at", "2019-01-15 19:41:24.658135"], ["id", 8]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 298ms (Views: 22.0ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/neopets/play_song/8" for ::1 at 2019-01-15 19:41:25 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mNeopet Load (2.7ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", -50], ["updated_at", "2019-01-15 19:41:36.185551"], ["id", 8]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 10875ms (Views: 26.8ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/neopets/users" for ::1 at 2019-01-15 19:42:00 +0000
+Processing by NeopetsController#show as HTML
+  Parameters: {"id"=>"users"}
+  [1m[35mNeopet Load (0.2ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 0]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms)
+
+ActiveRecord::RecordNotFound (Couldn't find Neopet with 'id'=users):
+  app/controllers/neopets_controller.rb:53:in `find_neo_params'
+
+
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.7ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/deji/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (105.1ms)
+
+
+Started GET "/users" for ::1 at 2019-01-15 19:42:10 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 41ms (Views: 39.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/4" for ::1 at 2019-01-15 19:42:15 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT "neopets".* FROM "neopets" WHERE "neopets"."user_id" = ?[0m  [["user_id", 4]]
+  Rendered users/show.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 131ms (Views: 126.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/neopets/index/4" for ::1 at 2019-01-15 19:42:17 +0000
+Processing by NeopetsController#index as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.4ms)[0m  [1mSELECT "neopets".* FROM "neopets"[0m
+  Rendered neopets/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 82ms (Views: 77.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/neopets/index/neopets/edit/4/6" for ::1 at 2019-01-15 19:42:20 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"4", "pet_id"=>"6"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 6]]
+  Rendered neopets/edit.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 116ms (Views: 112.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/neopets/index/neopets/edit/4/6" for ::1 at 2019-01-15 19:44:22 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"4", "pet_id"=>"6"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.1ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 6]]
+  Rendered neopets/_showpet.html.erb (0.6ms)
+  Rendered neopets/edit.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 47ms (Views: 45.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/neopets/index/neopets/edit/4/6" for ::1 at 2019-01-15 19:44:46 +0000
+Processing by NeopetsController#edit as HTML
+  Parameters: {"id"=>"4", "pet_id"=>"6"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.2ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 6]]
+  Rendered neopets/_showpet.html.erb (0.2ms)
+  Rendered neopets/edit.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 60ms (Views: 57.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/neopets/4/6/edit" for ::1 at 2019-01-15 19:44:59 +0000
+Processing by NeopetsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LyBryxkTQ6WdMGTUuB+Cg9vf6PADDa44B6av3RRP97yBoZzb7Td7GN9VmHW2d44jJoeWozKnlng6DSOVF9mMYQ==", "commit"=>"Add Neopet", "id"=>"4", "pet_id"=>"6"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mNeopet Load (0.1ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "neopets" SET "user_id" = ?, "updated_at" = ? WHERE "neopets"."id" = ?[0m  [["user_id", 4], ["updated_at", "2019-01-15 19:44:59.027350"], ["id", 6]]
+  [1m[35m (2.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/users/4
+Completed 302 Found in 10ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/users/4" for ::1 at 2019-01-15 19:44:59 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mNeopet Load (0.2ms)[0m  SELECT "neopets".* FROM "neopets" WHERE "neopets"."user_id" = ?  [["user_id", 4]]
+  Rendered users/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 49ms (Views: 46.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/neopets/6" for ::1 at 2019-01-15 19:45:06 +0000
+Processing by NeopetsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mNeopet Load (0.3ms)[0m  [1mSELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1[0m  [["id", 6]]
+  Rendered neopets/_showpet.html.erb (0.2ms)
+  Rendered neopets/show.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 79ms (Views: 76.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/neopets/play_song/6" for ::1 at 2019-01-15 19:45:09 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mNeopet Load (0.2ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 150], ["updated_at", "2019-01-15 19:45:09.597500"], ["id", 6]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/_showpet.html.erb (0.5ms)
+  Rendered neopets/show.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 658ms (Views: 72.6ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/neopets/play_song/6" for ::1 at 2019-01-15 19:45:13 +0000
+Processing by NeopetsController#play_song as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mNeopet Load (0.3ms)[0m  SELECT  "neopets".* FROM "neopets" WHERE "neopets"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  UPDATE "neopets" SET "happiness" = ?, "updated_at" = ? WHERE "neopets"."id" = ?  [["happiness", 200], ["updated_at", "2019-01-15 19:45:24.697253"], ["id", 6]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered neopets/_showpet.html.erb (0.1ms)
+  Rendered neopets/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 10745ms (Views: 38.3ms | ActiveRecord: 4.0ms)

@@ -1,0 +1,20 @@
+<h1>My name is <%= @neopet.name %></h1>
+
+<img src= <%= "#{@neopet.picture_link}" %> alt="">
+
+<table>
+
+  <tr>
+    <td><strong>Happiness</strong></td>
+    <td><%= @neopet.happiness %></td>
+  </tr>
+  <tr>
+    <td><strong>Hunger Level</strong></td>
+    <td><%= @neopet.hunger_level %></td>
+  </tr>
+  <tr>
+    <td><strong>Music Taste</strong></td>
+    <td><%= @neopet.music_taste %></td>
+  </tr>
+
+</table>

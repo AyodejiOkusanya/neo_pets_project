@@ -1,4 +1,7 @@
+
+<%= render 'showpet' %>
+
+
 <%= form_tag "/neopets/#{@user.id}/#{@neopet.id}/edit", method: "post" do |f|  %>
-  <p><%= @neopet.name %></p>
   <%= submit_tag "Add Neopet" %>
 <% end %>
